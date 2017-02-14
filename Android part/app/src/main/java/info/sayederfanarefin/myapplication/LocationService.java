@@ -28,6 +28,7 @@ public class LocationService extends Service {
     public void onCreate() {
         super.onCreate();
         intent = new Intent(BROADCAST_ACTION);
+        Log.v("aaaaaaaaaa", "...............");
     }
 
     @Override
@@ -56,6 +57,7 @@ public class LocationService extends Service {
     protected boolean isBetterLocation(Location location, Location currentBestLocation) {
         if (currentBestLocation == null) {
             // A new location is always better than no location
+            Log.v("aaaaaaaaaa", "...............1");
             return true;
         }
 
