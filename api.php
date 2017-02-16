@@ -5,6 +5,8 @@
 	$user_id = $_GET["user_id"];
 	$action = $_GET["action"];
 
+echo "12";
+
 	 	$conn = mysqli_connect("localhost", "thesis", "123456789", "location");
 
 	if($action == "post" ){
