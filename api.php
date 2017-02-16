@@ -5,14 +5,13 @@
 	$user_id = $_GET["user_id"];
 	$action = $_GET["action"];
 
-echo "12";
 
 	 	$conn = mysqli_connect("localhost", "thesis", "123456789", "location");
 
 	if($action == "post" ){
 			$sql_insert = "insert into location (lat, lon, user_id) values( '".$lat."', '".$lon."', '".$user_id."')";
 
-			if (mysqli_query($conn, $sql_insert);){
+			if (mysqli_query($conn, $sql_insert)){
 				echo json_encode("{success}");
 			}else{
 				echo json_encode("{failed}");
