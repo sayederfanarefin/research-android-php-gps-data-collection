@@ -14,7 +14,7 @@
 			if (mysqli_query($conn, $sql_insert)){
 				echo json_encode("{success}");
 			}else{
-				echo json_encode("{failed}");
+				echo json_encode($sql_insert);
 			}
 
 		}else{
