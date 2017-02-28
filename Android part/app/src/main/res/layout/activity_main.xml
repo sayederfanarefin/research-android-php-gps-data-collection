@@ -11,7 +11,38 @@
     tools:context="info.sayederfanarefin.myapplication.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Thesis"
+        android:id="@+id/text_title"
+        android:padding="12dp"
+        android:textSize="24dp"
+        android:textAlignment="center"/>
+
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Stored locations List"
+        android:onClick="selfDestruct"
+        android:layout_below="@+id/text_title"
+        android:id="@+id/button_locations_list"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Stored locations map"
+        android:onClick="selfDestruct"
+        android:layout_below="@+id/button_locations_list"
+        android:id="@+id/button_locations_map"
+        />
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Stored locations map"
+        android:onClick="selfDestruct"
+        android:layout_below="@+id/button_locations_map"
+        android:id="@+id/button_current_location"/>
+
 </RelativeLayout>

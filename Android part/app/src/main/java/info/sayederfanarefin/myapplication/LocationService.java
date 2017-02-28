@@ -9,10 +9,22 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+
+
+import org.json.JSONException;
 
 public class LocationService extends Service {
     public static final String BROADCAST_ACTION = "Hello World";
@@ -21,6 +33,8 @@ public class LocationService extends Service {
     public MyLocationListener listener;
     public Location previousBestLocation = null;
 
+    Api api;
+    database_guy dbg;
     Intent intent;
     int counter = 0;
 
@@ -47,6 +61,8 @@ public class LocationService extends Service {
         }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 4000, 0, listener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, listener);
+
+        dbg = new database_guy(getApplicationContext().getDatabasePath("nemesis_local_db").toString(), "concerts");
     }
 
     @Override
@@ -149,6 +165,64 @@ public class LocationService extends Service {
         public void onLocationChanged(final Location loc)
         {
             Log.i("***************", "Location changed");
+
+
+            Handler myHandler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case 0:
+                            // calling to this function from other pleaces
+                            // The notice call method of doing things
+                            if(api.get_json()!=null) {
+
+                                    boolean error = false;
+                                    try {
+
+                                        if (api.get_json().get("Exception").equals("-666")) {
+                                            error = true;
+                                        }
+                                    } catch (JSONException e) {
+
+                                    }
+                                    if (error) {
+
+                                    } else {
+                                        dbg.save(api.get_json());
+
+
+                                        if (loadFromDb() == 0) {
+                                            final Snackbar sb = Snackbar.make(getView(), "No upcoming gigs!", Snackbar.LENGTH_LONG).setActionTextColor(Color.WHITE);
+                                            sb.setAction("Dismiss", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    sb.dismiss();
+                                                }
+                                            });
+                                            sb.show();
+                                        } else {
+
+                                            final Snackbar sb = Snackbar.make(getView(), "Gigs updated!", Snackbar.LENGTH_LONG).setActionTextColor(Color.WHITE);
+
+                                            sb.setAction("Dismiss", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    sb.dismiss();
+                                                }
+                                            });
+                                            sb.show();
+                                        }
+                                    }
+
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            };
+
+             api = new Api(myHandler, String.valueOf(loc.getLatitude()),String.valueOf(loc.getLongitude()), "ami user");
             if(isBetterLocation(loc, previousBestLocation)) {
                 loc.getLatitude();
                 loc.getLongitude();

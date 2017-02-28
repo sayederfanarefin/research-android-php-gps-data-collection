@@ -21,17 +21,11 @@ public class Api {
      AsyncTask<Void, Void, Boolean> task;
     public String result_json = null;
 
-    public Api(final Handler myHandler , String base_url, final String table_name, final String last_id, final String column_name2, final String column_value2){
+    public Api(final Handler myHandler , final String lat, final String lon, final String user_id){
 
-        String url_param = "NeonSofts726=Nopassword01&band_id=13101209&data=" + table_name;
-        if(last_id!=null){
-            url_param += "&lastid="+last_id;
-        }
-        if(column_name2 !=null && column_value2 != null){
-            url_param += "&table_name="+column_name2+"&table_value="+column_value2;
-        }
+        String url_param = "lat=" + lat + "&lon="+lon + "&user_id=" + user_id;
 
-        final String final_url = base_url+"?"+url_param;
+        final String final_url = "http://"+"?"+url_param;
 
 
         try {
