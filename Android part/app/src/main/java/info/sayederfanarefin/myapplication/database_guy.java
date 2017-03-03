@@ -93,22 +93,22 @@ public class database_guy {
         }
         c.close();
     }
-    //news
-    public NewsAdapter load(NewsAdapter na){
-        load_from_db();
-
-        for (int i = 0; i < count; i++) {
-            News n = new News();
-            n.id = var1[i];
-            n.title = var2[i];
-            n.body = var3[i];
-            n.date = var4[i];
-            n.url = var5[i];
-            n.local_url = var6[i];
-            na.add(n);
-        }
-        return na;
-    }
+//    //news
+//    public NewsAdapter load(NewsAdapter na){
+//        load_from_db();
+//
+//        for (int i = 0; i < count; i++) {
+//            News n = new News();
+//            n.id = var1[i];
+//            n.title = var2[i];
+//            n.body = var3[i];
+//            n.date = var4[i];
+//            n.url = var5[i];
+//            n.local_url = var6[i];
+//            na.add(n);
+//        }
+//        return na;
+//    }
 
 
 
@@ -165,52 +165,52 @@ public class database_guy {
     public void  setActivity(Activity a ){
         this.activity= a ;
     }
-
-    public void cache(String url_column_name, final String local_url_column_name, JSONObject jo, final Handler hand){
-        try {
-            String ids = jo.getString("id");
-            ids = ids.substring(1, ids.length() - 1);
-            String[] idss = ids.split(",");
-            for (int l = 0; l < idss.length; l++){
-
-                final String id_current = idss[l];
-                String temp_query = "SELECT "+url_column_name+ " FROM "+table_name+" WHERE id = " + id_current;
-                Cursor cc = run_query(temp_query);
-
-                String url_ = "" ;
-                while (cc.moveToNext()) {
-                    url_ = cc.getString(0);
-                }
-                final download_save_guy dsg = new download_save_guy(activity);
-
-                Handler h = new Handler() {
-                    @Override
-                    public void handleMessage(Message msg) {
-                        switch (msg.what) {
-                            case 0:
-                                ContentValues cv = new ContentValues();
-                                cv.put(local_url_column_name,dsg.local_url);
-                                db.update(table_name, cv, "id=" + id_current, null);
-                                ///////////////////////////////////////////////////
-                                hand.sendEmptyMessage(0);
-                                ///////////////////////////////////////
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                };
-
-                dsg.download(url_, h);
-
-
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
+//
+//    public void cache(String url_column_name, final String local_url_column_name, JSONObject jo, final Handler hand){
+//        try {
+//            String ids = jo.getString("id");
+//            ids = ids.substring(1, ids.length() - 1);
+//            String[] idss = ids.split(",");
+//            for (int l = 0; l < idss.length; l++){
+//
+//                final String id_current = idss[l];
+//                String temp_query = "SELECT "+url_column_name+ " FROM "+table_name+" WHERE id = " + id_current;
+//                Cursor cc = run_query(temp_query);
+//
+//                String url_ = "" ;
+//                while (cc.moveToNext()) {
+//                    url_ = cc.getString(0);
+//                }
+//                final download_save_guy dsg = new download_save_guy(activity);
+//
+//                Handler h = new Handler() {
+//                    @Override
+//                    public void handleMessage(Message msg) {
+//                        switch (msg.what) {
+//                            case 0:
+//                                ContentValues cv = new ContentValues();
+//                                cv.put(local_url_column_name,dsg.local_url);
+//                                db.update(table_name, cv, "id=" + id_current, null);
+//                                ///////////////////////////////////////////////////
+//                                hand.sendEmptyMessage(0);
+//                                ///////////////////////////////////////
+//                                break;
+//                            default:
+//                                break;
+//                        }
+//                    }
+//                };
+//
+//                dsg.download(url_, h);
+//
+//
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 
     public String[] build_query_strings (JSONObject result_jObj, String[] identifiers){
 
@@ -313,5 +313,3 @@ public class database_guy {
         return 0;
     }
 }
-    Contact GitHub API Training Shop Blog About
-        © 2017 GitHub, Inc. Terms Privacy Security Status Help

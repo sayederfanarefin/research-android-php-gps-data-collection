@@ -37,12 +37,12 @@
         android:id="@+id/button_locations_map"
         />
 
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:text="Stored locations map"
-        android:onClick="selfDestruct"
-        android:layout_below="@+id/button_locations_map"
-        android:id="@+id/button_current_location"/>
+    <!--<Button-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:text="Stored locations map"-->
+        <!--android:onClick="selfDestruct"-->
+        <!--android:layout_below="@+id/button_locations_map"-->
+        <!--android:id="@+id/button_current_location"/>-->
 
 </RelativeLayout>

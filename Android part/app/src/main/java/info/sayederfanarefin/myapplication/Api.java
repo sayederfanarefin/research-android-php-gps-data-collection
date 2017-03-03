@@ -21,11 +21,11 @@ public class Api {
      AsyncTask<Void, Void, Boolean> task;
     public String result_json = null;
 
-    public Api(final Handler myHandler , final String lat, final String lon, final String user_id){
+    public Api(final Handler myHandler , final String lat, final String lon, final String user_id, final String action){
 
-        String url_param = "lat=" + lat + "&lon="+lon + "&user_id=" + user_id;
+        String url_param = "lat=" + lat + "&lon="+lon + "&user_id=" + user_id + "&action="+action;
 
-        final String final_url = "http://"+"?"+url_param;
+        final String final_url = "http://demo.sayederfanarefin.info/sakibul_thesis/api.php"+"?"+url_param;
 
 
         try {
@@ -35,7 +35,7 @@ public class Api {
                 protected Boolean doInBackground(Void... params) {
                     try {
 
-Log.v("==url ", final_url);
+                        Log.v("==url ", final_url);
                         URL url = new URL(final_url);
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         conn.setReadTimeout(10000);
@@ -69,6 +69,7 @@ Log.v("==url ", final_url);
                         }
                         result_json = result.toString();
                         Log.v("===url reply", result_json);
+
                     }catch (Exception e ){
                         Log.v("===url params", "api exception"+e.getMessage());
                     }

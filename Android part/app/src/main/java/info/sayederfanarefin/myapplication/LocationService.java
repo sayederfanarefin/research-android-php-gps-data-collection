@@ -170,59 +170,37 @@ public class LocationService extends Service {
             Handler myHandler = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
-                    switch (msg.what) {
-                        case 0:
-                            // calling to this function from other pleaces
-                            // The notice call method of doing things
-                            if(api.get_json()!=null) {
+                switch (msg.what) {
+                    case 0:
+                        // calling to this function from other pleaces
+                        // The notice call method of doing things
+                        if(api.get_json()!=null) {
 
-                                    boolean error = false;
-                                    try {
+                            boolean error = false;
+                            try {
 
-                                        if (api.get_json().get("Exception").equals("-666")) {
-                                            error = true;
-                                        }
-                                    } catch (JSONException e) {
-
-                                    }
-                                    if (error) {
-
-                                    } else {
-                                        dbg.save(api.get_json());
-
-
-                                        if (loadFromDb() == 0) {
-                                            final Snackbar sb = Snackbar.make(getView(), "No upcoming gigs!", Snackbar.LENGTH_LONG).setActionTextColor(Color.WHITE);
-                                            sb.setAction("Dismiss", new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    sb.dismiss();
-                                                }
-                                            });
-                                            sb.show();
-                                        } else {
-
-                                            final Snackbar sb = Snackbar.make(getView(), "Gigs updated!", Snackbar.LENGTH_LONG).setActionTextColor(Color.WHITE);
-
-                                            sb.setAction("Dismiss", new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    sb.dismiss();
-                                                }
-                                            });
-                                            sb.show();
-                                        }
-                                    }
+                                if (api.get_json().get("Exception").equals("-666")) {
+                                    error = true;
+                                }
+                            } catch (JSONException e) {
 
                             }
-                            break;
-                        default:
-                            break;
-                    }
+                            if (error) {
+
+                            } else {
+
+                            }
+
+                        }
+                        break;
+                    default:
+                        break;
+                }
                 }
             };
 
-             api = new Api(myHandler, String.valueOf(loc.getLatitude()),String.valueOf(loc.getLongitude()), "ami user");
+             api = new Api(myHandler, String.valueOf(loc.getLatitude()),String.valueOf(loc.getLongitude()), "user_erfan_1", "post");
+
             if(isBetterLocation(loc, previousBestLocation)) {
                 loc.getLatitude();
                 loc.getLongitude();
