@@ -62,7 +62,7 @@ public class LocationService extends Service {
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 4000, 0, listener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 0, listener);
 
-        dbg = new database_guy(getApplicationContext().getDatabasePath("nemesis_local_db").toString(), "concerts");
+        dbg = new database_guy(getApplicationContext().getDatabasePath("nemesis_local_db").toString(), "location_table");
     }
 
     @Override

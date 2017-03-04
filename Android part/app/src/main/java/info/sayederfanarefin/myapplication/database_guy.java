@@ -93,22 +93,22 @@ public class database_guy {
         }
         c.close();
     }
-//    //news
-//    public NewsAdapter load(NewsAdapter na){
-//        load_from_db();
-//
-//        for (int i = 0; i < count; i++) {
-//            News n = new News();
-//            n.id = var1[i];
-//            n.title = var2[i];
-//            n.body = var3[i];
-//            n.date = var4[i];
-//            n.url = var5[i];
-//            n.local_url = var6[i];
-//            na.add(n);
-//        }
-//        return na;
-//    }
+    //news
+    public NewsAdapter load(NewsAdapter na){
+        load_from_db();
+
+        for (int i = 0; i < count; i++) {
+            News n = new News();
+            n.location_id = var1[i];
+            n.user = var2[i];
+            n.lat = var3[i];
+            n.time_stamp = var4[i];
+            n.lon = var5[i];
+
+            na.add(n);
+        }
+        return na;
+    }
 
 
 
